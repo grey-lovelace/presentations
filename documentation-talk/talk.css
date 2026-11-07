@@ -1,0 +1,326 @@
+/* Extra styles for this talk only. They cover slides that the brand layouts
+   in deck.css do not have: the post-it wall, code samples, the org chart,
+   the commandments list, and the four QR codes at the end. Colors come from
+   the brand variables in deck.css. */
+
+/* ---------- click-by-click reveals ---------- */
+/* deck.css plays an entrance animation on cards when the slide opens.
+   A card that is a fragment plays it when its click reveals it instead. */
+.anim .cards .card.fragment,
+.anim .postits .postit.fragment,
+.anim .icon-cards .icon-card.fragment{ animation:none; }
+.reveal .postit.fragment.visible{ animation:slap .6s ease-out both; }
+.reveal .icon-card.fragment.visible{ animation:riseIn .45s ease both; }
+
+/* ---------- post-it wall (the "Resources" slide) ---------- */
+/* The notes are placed by hand so that the wall looks messy. Each note has its own
+   position (--x, --y), tilt (--rot), and delay (--d) within its click group. */
+.postits{ position:relative; height:440px; }
+.postit{ position:absolute; left:var(--x); top:var(--y); width:200px; height:170px; padding:28px 16px 14px; box-sizing:border-box;
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  font-size:25px; font-weight:900; line-height:1.15; color:var(--navy);
+  box-shadow:0 10px 20px rgba(6,26,64,.22); transform:rotate(var(--rot,0deg)); }
+.reveal .postit.fragment.visible{ animation-delay:var(--d,0s); }
+.postit::before{ content:""; position:absolute; top:-12px; left:50%; width:96px; height:30px;
+  transform:translateX(-50%) rotate(-4deg); background:rgba(255,255,255,.5); }
+/* Red notes never sit beside or above green ones. */
+.postit.red{ background:var(--red); color:#fff; }
+.postit.blue{ background:var(--blue); color:#fff; }
+.postit.cyan{ background:var(--cyan); }
+.postit.green{ background:var(--green); }
+.postit:nth-child(1){ --x:28px;  --y:34px;  --rot:-7deg; }
+.postit:nth-child(2){ --x:214px; --y:2px;   --rot:8deg; }
+.postit:nth-child(3){ --x:462px; --y:52px;  --rot:-3deg; }
+.postit:nth-child(4){ --x:684px; --y:0px;   --rot:6deg;  --d:.3s; }
+.postit:nth-child(5){ --x:64px;  --y:248px; --rot:11deg; }
+.postit:nth-child(6){ --x:282px; --y:196px; --rot:-9deg; --d:.25s; }
+.postit:nth-child(7){ --x:516px; --y:268px; --rot:4deg;  --d:.5s; }
+.postit:nth-child(8){ --x:736px; --y:212px; --rot:-6deg; --d:.75s; }
+.postit:nth-child(9){ --x:928px; --y:104px; --rot:12deg; }
+
+/* ---------- code samples ---------- */
+.code{ margin:0; background:var(--navy); color:#E6EDF7; border-radius:14px; padding:20px 24px;
+  font:19px/1.45 Consolas,Menlo,monospace; white-space:pre-wrap; text-align:left;
+  box-shadow:0 10px 24px rgba(6,26,64,.2); }
+.code.big{ font-size:30px; padding:34px 40px; }
+.code .c{ color:#9FB3CF; font-style:italic; }   /* comment */
+.code .k{ color:var(--cyan); }                   /* keyword */
+.code .f{ color:#FFD166; }                       /* function name */
+.code .t{ color:var(--teal); }                   /* type */
+.code .s{ color:#9BE7B4; }                       /* string */
+.panel .code{ font-size:17px; padding:16px 18px; }
+
+/* ---------- two screenshots side by side, each with a heading ---------- */
+.pair{ display:flex; gap:40px; align-items:flex-start; justify-content:center; }
+.pair figure{ flex:1; margin:0; display:flex; flex-direction:column; gap:12px; align-items:center; }
+.pair figcaption{ font-size:28px; font-weight:900; }
+.pair img{ max-width:100%; max-height:380px; border-radius:6px; box-shadow:0 8px 22px rgba(6,26,64,.16); }
+.pair .bad img{ max-height:200px; }
+
+/* faded side of the Agile Manifesto comparison */
+.panel.dim{ filter:grayscale(1) opacity(.45); }
+.panel img{ display:block; width:100%; height:200px; object-fit:cover; border-radius:10px; margin-top:6px; }
+
+/* ---------- org chart ---------- */
+.org{ display:flex; gap:56px; align-items:center; }
+.org-legend{ list-style:none; margin:0; padding:0; font-size:26px; }
+.org-legend li{ padding-left:0 !important; margin-bottom:10px !important; display:flex; align-items:center; gap:14px; }
+.org-legend li::before{ display:none; }
+.org-tree{ flex:1; display:flex; flex-direction:column; align-items:center; }
+.org-row{ display:flex; gap:28px; position:relative; padding-top:34px; }
+.org-row::before{ content:""; position:absolute; top:0; left:16%; right:16%; height:22px;
+  border:3px solid var(--light-grey); border-bottom:0; }
+.org-stem{ width:3px; height:24px; background:var(--light-grey); }
+.org-node{ background:#fff; border:3px solid var(--light-grey); border-radius:12px; padding:12px 20px; min-width:200px;
+  text-align:center; box-sizing:border-box; }
+.org-node b{ display:block; font-size:24px; }
+.org-node span{ display:block; font-size:18px; color:var(--gray); }
+.dots{ display:flex; gap:6px; justify-content:center; margin-top:8px; }
+.dot{ width:18px; height:18px; border-radius:50%; display:inline-block; flex:0 0 auto; }
+.org-legend .dot{ width:22px; height:22px; }
+.dot.red{ background:var(--red); } .dot.cyan{ background:var(--cyan); }
+.dot.blue{ background:var(--blue); } .dot.green{ background:var(--green); }
+
+/* ---------- the ten commandments ---------- */
+.body ol.roman > li{ font-size:27px; margin-bottom:16px; padding-left:76px; }
+.body ol.roman > li::before{ content:counter(step, upper-roman); font-family:Georgia,serif; font-size:21px; width:56px; }
+.body ol.roman.second{ counter-reset:step 5; }
+
+/* ---------- AI verdict list: green check or red cross instead of a dot ---------- */
+.body ul.verdicts > li{ padding-left:64px; margin-bottom:22px; }
+.body ul.verdicts > li::before{ width:44px; height:44px; top:-.05em; left:0;
+  display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:900; }
+.body ul.verdicts > li.yes::before{ content:"\2713"; background:var(--green); color:var(--navy); }
+.body ul.verdicts > li.no::before{ content:"\2715"; background:var(--red); color:#fff; }
+
+/* ---------- speaker slide with a LinkedIn QR code ---------- */
+.row .speakers{ flex:1; }
+.row .qr{ width:200px; height:200px; }
+
+/* ---------- zombie beside the template lists ---------- */
+.zombie{ height:330px; flex:0 0 auto; }
+
+/* ---------- four QR codes on the closing slide ---------- */
+/* The four codes sit in one row, so each one can be large. */
+/* "Questions?" and the button sit in a row above the codes, so the codes get the full slide width. */
+.thanks:has(.qr-cards.four){ flex-direction:column; align-items:center; gap:30px; }
+.thanks:has(.qr-cards.four) .thanks-text{ flex:0 0 auto; display:flex; align-items:center; gap:48px; }
+.thanks:has(.qr-cards.four) .thanks-text ul li{ margin:0; }
+.thanks:has(.qr-cards.four) .thanks-text .button{ margin-top:0; }
+.qr-cards.four{ display:grid; grid-template-columns:repeat(4, auto); gap:18px 40px; }
+.qr-cards.four .qr{ width:240px; height:240px; }
+.qr-cards.four figcaption{ font-size:22px; }
+
+/* two code samples side by side, each with a heading */
+.code-pair{ display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+.code-pair .col-h{ margin-bottom:10px !important; }
+.code-pair .code{ font-size:18px; }
+
+/* a screenshot with no caption can use more of the slide */
+.figure.big img{ max-height:440px; }
+
+/* The About Me photos have details in their corners, such as the unicorn and the cat.
+   A rounded frame in the photo's own shape shows the whole photo without cropping. */
+.row .speakers.one .avatar{ flex:0 0 auto; width:auto; height:440px; border-radius:28px; }
+.row .speakers.one .avatar img{ width:auto; height:100%; }
+
+/* ---------- zoom in on one part of a screenshot (slide 7) ---------- */
+/* Click 1 shows .zoom-box around the sources. Click 2 shows .zoom-step, and the
+   :has() rule then scales the screenshot so that the box fills the frame.
+   The box position is a percentage of the screenshot's size. */
+.zoom-frame{ height:440px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.zoom-inner{ position:relative; height:440px; transition:transform .9s cubic-bezier(.45,0,.2,1); transform-origin:50% 50%; }
+.zoom-inner img{ display:block; height:100%; width:auto; border-radius:6px; box-shadow:0 10px 28px rgba(6,26,64,.16); }
+.zoom-box{ position:absolute; left:47.2%; top:57.4%; width:36.6%; height:41.2%; border:3px solid var(--red); border-radius:6px;
+  box-shadow:0 0 0 4px rgba(229,48,73,.18); box-sizing:border-box; }
+/* Moves the center of the box to the center of the frame, then scales it up. */
+.zoom-frame:has(.zoom-step.visible) .zoom-inner{ transform:scale(2.4) translate(-15.5%, -28%); }
+/* The PDF shows the whole screenshot with the box, not the zoomed view. */
+html.print-pdf .zoom-frame .zoom-inner{ transform:none !important; }
+
+/* ---------- science grid (slide 11): four findings, each with an icon, a heading, and two or three lines ---------- */
+.sci-grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px 36px; }
+.sci-card{ display:flex; gap:22px; align-items:center; background:var(--panel); border-left:8px solid var(--c, var(--blue));
+  border-radius:0 18px 18px 0; padding:22px 26px 24px 22px; }
+/* Red is left out so that it never sits beside the green card. */
+.sci-card:nth-child(2){ --c:var(--green); }
+.sci-card:nth-child(3){ --c:var(--navy-alt); }
+.sci-card:nth-child(4){ --c:var(--cyan); }
+.sci-card .icon{ flex:0 0 auto; width:68px; height:68px; object-fit:contain; background:#fff; border-radius:50%; padding:10px; box-sizing:border-box; }
+.sci-h{ font-size:26px; font-weight:900; line-height:1.15; margin-bottom:8px !important; }
+.sci-t{ font-size:22px; line-height:1.35; }
+.reveal .sci-card.fragment.visible{ animation:riseIn .45s ease both; }
+
+/* ---------- open section dividers: big left-aligned type on the brand color, no box ---------- */
+/* deck.js still sets the background color from the green / blue / default class.
+   Text is navy on the green and cyan fields, and white on the blue field. */
+.reveal .slides > section.slide-section.open,
+html.print-pdf .reveal .pdf-page > section.slide-section.open{ display:flex !important; flex-direction:column; align-items:flex-start;
+  justify-content:center; padding:0 110px !important; color:var(--navy); }
+.reveal .slides > section.slide-section.blue.open,
+html.print-pdf .reveal .pdf-page > section.slide-section.blue.open{ color:#fff; }
+.slide-section.open .section-kicker{ position:relative; z-index:1; font-size:26px; font-weight:900; letter-spacing:.16em; text-transform:uppercase;
+  margin-bottom:14px !important; opacity:.85; }
+.slide-section.open .section-title{ position:relative; z-index:1; color:inherit; text-align:left; text-shadow:none;
+  font-size:112px; line-height:1; letter-spacing:-.01em; max-width:1000px; }
+.slide-section.open .section-rule{ position:relative; z-index:1; width:220px; height:10px; margin-top:34px; background:currentColor; }
+/* A large, faint copy of the logo mark fills the empty right side.
+   The box stays inside the slide, and its background image runs past the box's edges and is cut off there. */
+.slide-section.open .section-ghost{ position:absolute; right:0; bottom:0; width:430px; height:430px; opacity:.16;
+  background:url(assets/mark-white.png) no-repeat 0 0 / 520px 520px; }
+.slide-section.open.anim .section-kicker{ animation:dropIn .5s ease both; }
+.slide-section.open.anim .section-title{ animation:riseIn .6s ease .1s both; }
+.slide-section.open.anim .section-rule{ transform-origin:left center; animation:drawRule .6s cubic-bezier(.22,.61,.36,1) .35s both; }
+
+/* The balance scale from the original deck, between the two Agile Manifesto panels.
+   It tips toward the left panel, Working Software. */
+.compare-scale{ flex:0 0 150px; width:150px; height:auto; align-self:center; }
+.anim .compare-scale{ animation:popIn .45s cubic-bezier(.34,1.56,.64,1) .15s both; }
+
+/* Timeline steps that are fragments rise in when their click reveals them. */
+.anim .t-step.fragment{ animation:none; }
+.reveal .t-step.fragment.visible{ animation:riseIn .45s ease both; }
+
+/* ---------- morph: the process document turns into the process diagram (slide 18) ---------- */
+/* The slide opens on the document. One click shows .morph-step, and the :has() rules
+   squash and fade the document while the diagram grows into its place. */
+.morph{ display:flex; flex-direction:column; align-items:center; }
+.morph-stage{ position:relative; width:1100px; height:400px; }
+.morph-doc, .morph-diagram{ position:absolute; left:50%; top:50%;
+  transition:transform .9s cubic-bezier(.45,0,.2,1), opacity .7s ease, filter .7s ease; }
+.morph-doc{ height:400px; transform:translate(-50%,-50%); }
+.morph-doc img{ height:100%; display:block; border-radius:6px; box-shadow:0 10px 28px rgba(6,26,64,.16); }
+.morph-diagram{ width:1100px; border-radius:6px; box-shadow:0 10px 28px rgba(6,26,64,.16);
+  opacity:0; filter:blur(8px); transform:translate(-50%,-50%) scale(.52, 1.3); }
+/* The "6 Pages!" tag points left at the document. */
+.morph-callout{ position:absolute; top:24px; right:-150px; background:var(--red); color:#fff; font-size:28px; font-weight:900;
+  padding:12px 22px 12px 40px; clip-path:polygon(22px 0,100% 0,100% 100%,22px 100%,0 50%);
+  box-shadow:0 6px 14px rgba(6,26,64,.2); }
+.morph:has(.morph-step.visible) .morph-doc{ opacity:0; filter:blur(8px); transform:translate(-50%,-50%) scale(1.6, .76); }
+/* The tag leaves at once, so the stretched document stays inside the slide. */
+.morph:has(.morph-step.visible) .morph-callout{ display:none; }
+.morph:has(.morph-step.visible) .morph-diagram{ opacity:1; filter:none; transform:translate(-50%,-50%); }
+.morph-caption{ font-size:24px; font-weight:700; color:var(--gray); margin-top:16px !important; transition:opacity .5s ease; }
+.morph-caption.after{ margin-top:-31px !important; opacity:0; }
+.morph:has(.morph-step.visible) .morph-caption.before{ opacity:0; }
+.morph:has(.morph-step.visible) .morph-caption.after{ opacity:1; transition-delay:.4s; }
+
+/* ---------- stop moment (the audience slide) ---------- */
+/* A stop sign drawn in CSS: a red octagon with a white inner edge. It slaps down
+   with the takeaway on the last click. */
+.stop-moment{ display:flex; align-items:center; gap:40px; margin-top:34px; padding:22px 30px; border-radius:20px;
+  background:var(--panel); }
+.stop-sign{ flex:0 0 auto; width:150px; height:150px; background:#fff; display:flex; align-items:center; justify-content:center;
+  clip-path:polygon(29.3% 0,70.7% 0,100% 29.3%,100% 70.7%,70.7% 100%,29.3% 100%,0 70.7%,0 29.3%); }
+.stop-sign span{ width:136px; height:136px; background:var(--red); color:#fff; display:flex; align-items:center; justify-content:center;
+  font-size:40px; font-weight:900; letter-spacing:.04em;
+  clip-path:polygon(29.3% 0,70.7% 0,100% 29.3%,100% 70.7%,70.7% 100%,29.3% 100%,0 70.7%,0 29.3%); }
+.stop-sign{ filter:drop-shadow(0 6px 12px rgba(6,26,64,.25)); }
+.stop-text{ font-size:36px; font-weight:900; line-height:1.2; }
+.reveal .stop-moment.fragment.visible{ animation:riseIn .4s ease both; }
+.reveal .stop-moment.fragment.visible .stop-sign{ --rot:-8deg; animation:slap .7s ease-out .1s both; }
+
+/* ---------- wiki page cards (the user journey slide) ---------- */
+/* Each card is a simple drawing of a Confluence page: a breadcrumb, a title, and gray lines for the body text. */
+.wiki-pages{ flex:1; display:flex; flex-direction:column; gap:26px; align-self:center; }
+.wiki-page{ background:#fff; border:2px solid var(--light-grey); border-top:8px solid var(--blue); border-radius:10px;
+  padding:16px 22px 20px; box-shadow:0 8px 22px rgba(6,26,64,.14); }
+.wiki-page + .wiki-page{ border-top-color:var(--cyan); }
+.wiki-crumb{ display:flex; align-items:center; gap:8px; font-size:15px; font-weight:700; color:var(--gray); }
+.wiki-icon{ width:14px; height:17px; border:2px solid var(--gray); border-radius:2px; box-sizing:border-box; }
+.wiki-title{ font-size:25px; font-weight:900; line-height:1.15; margin:10px 0 14px !important; }
+.wiki-lines{ display:flex; flex-direction:column; gap:8px; }
+.wiki-lines i{ display:block; height:8px; border-radius:4px; background:var(--light-grey); }
+.wiki-lines i.short{ width:60%; }
+.reveal .wiki-page.fragment.visible{ animation:riseIn .45s ease both; }
+
+/* ---------- forest moment (the docs location slide) ---------- */
+/* A row of drawn trees with a document page standing among them. When the click reveals
+   the panel, the page wobbles and then falls over, like the tree in the old riddle. */
+.forest-moment{ display:flex; align-items:center; gap:36px; margin-top:22px; padding:16px 30px; border-radius:20px; background:var(--panel); }
+.forest{ position:relative; flex:0 0 auto; display:flex; align-items:flex-end; gap:12px; height:120px; padding:0 8px;
+  border-bottom:5px solid var(--navy-alt); }
+.tree{ position:relative; width:56px; height:96px; display:block; }
+.tree.tall{ height:116px; }
+/* The tree crown is a green triangle. The trunk is a short navy bar under it. */
+.tree::before{ content:""; position:absolute; left:0; right:0; top:0; bottom:18px; background:var(--green);
+  clip-path:polygon(50% 0,100% 100%,0 100%); }
+.tree.tall::before{ background:var(--teal); }
+.tree::after{ content:""; position:absolute; left:50%; bottom:0; width:10px; height:20px; margin-left:-5px; background:var(--navy); }
+/* The document page stands upright until the panel appears. */
+.doc-tree{ width:64px; height:86px; background:#fff; border:3px solid var(--navy); border-radius:4px; box-sizing:border-box;
+  padding:12px 9px; display:flex; flex-direction:column; gap:7px; transform-origin:0 100%;
+  margin-left:96px; position:relative; z-index:1; }
+/* The empty space to the left of the page is the clearing it falls into. */
+.doc-tree i{ display:block; height:5px; border-radius:3px; background:var(--light-grey); }
+.doc-tree i:last-child{ width:60%; }
+.moment-text{ font-size:34px; font-weight:900; line-height:1.2; }
+@keyframes topple{
+  0%{ transform:rotate(0); }
+  15%{ transform:rotate(7deg); }
+  30%{ transform:rotate(-4deg); }
+  100%{ transform:rotate(-88deg); }
+}
+.reveal .forest-moment.fragment.visible{ animation:riseIn .4s ease both; }
+.reveal .forest-moment.fragment.visible .doc-tree{ animation:topple 1.4s cubic-bezier(.55,0,.85,.35) .7s both; }
+
+/* ---------- path of least resistance: screenshot with two sharp process cards on top ---------- */
+/* The screenshot is cropped above its own blurry process boxes. The two boxes are redrawn as text,
+   and each card appears on its own click, hanging off the bottom corners of the screenshot. */
+.path{ position:relative; align-self:center; margin-bottom:80px; }
+.path > img{ display:block; width:1090px; height:auto; border-radius:8px; box-shadow:0 10px 28px rgba(6,26,64,.16); }
+.path-card{ position:absolute; top:225px; background:var(--navy); color:#fff; border-radius:14px; padding:18px 24px;
+  font-family:Consolas,Menlo,monospace; box-shadow:0 14px 30px rgba(6,26,64,.4); }
+.path-card.left{ left:-34px; }
+.path-card.right{ right:-34px; width:380px; }
+.path-h{ font-size:21px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--cyan); margin-bottom:10px !important; }
+.path-card ul{ list-style:none; margin:0; padding:0; }
+.path-card li{ font-size:20px; line-height:1.5; padding-left:0 !important; margin:0 !important; }
+.path-card li::before{ content:"[\2713] " !important; position:static !important; background:none !important; width:auto !important; height:auto !important;
+  color:var(--green); }
+.path-t{ font-size:19px; line-height:1.4; }
+.path-btn{ display:inline-block; margin-top:12px !important; font-size:19px; border:2px solid #fff; border-radius:8px; padding:6px 12px; }
+.reveal .path-card.fragment.visible{ animation:riseIn .45s ease both; }
+
+/* ---------- definition plus actions in a comparison panel (the ownership slide) ---------- */
+/* The definition is a plain line. Each recommended action sits on a white chip with a blue arrow. */
+.panel-def{ font-size:26px; line-height:1.3; margin-bottom:18px !important; padding-bottom:16px; border-bottom:2px solid var(--navy-alt); }
+.panel ul.actions{ display:flex; flex-direction:column; gap:12px; }
+.panel ul.actions > li{ border-top:0; padding:12px 18px 12px 58px; background:#fff; border-radius:12px; font-weight:900; font-size:26px;
+  box-shadow:0 4px 10px rgba(6,26,64,.08); }
+.panel ul.actions > li::before{ display:flex; content:"\2192"; position:absolute; left:16px; top:50%; transform:translateY(-50%);
+  width:30px; height:30px; border-radius:50%; background:var(--blue); color:#fff; font-size:20px; align-items:center; justify-content:center; }
+
+/* A picture that uses all the height between the title band and the footer. */
+.figure.max{ margin:-24px 0; }
+.figure.max img{ max-height:490px; }
+
+/* ---------- all ten commandments at once, beside a large QR code ---------- */
+/* The list is small on purpose. The QR code is the part people need to use. */
+.commandments{ gap:56px; align-items:center; }
+.commandments ol.roman.small{ flex:1; }
+.body ol.roman.small > li{ font-size:19px; line-height:1.3; margin-bottom:9px; padding-left:52px; }
+/* Each numeral sits in a pill that is 26px tall, so the pills clear each other at this line spacing.
+   The pill grows wider for long numerals such as VIII. */
+.body ol.roman.small > li::before{ width:auto; min-width:26px; height:26px; padding:0 6px; box-sizing:border-box; border-radius:13px;
+  font-size:12px; top:-.05em; }
+.qr-card.big .qr{ width:360px; height:360px; }
+.qr-card.big figcaption{ font-size:30px; max-width:none; }
+
+/* Comparison panels that are fragments rise in when their click reveals them. */
+.anim .panel.fragment{ animation:none; }
+.reveal .panel.fragment.visible{ animation:riseIn .45s ease both; }
+
+/* The trivia podcast QR code shows the podcast's logo in the middle instead of the Source Allies mark.
+   deck.js adds the mark as an <img>, and content:url() swaps the picture that the <img> shows. */
+.qr.sftc .qr-logo{ content:url(assets/talk/sftc-logo.png); padding:0; border-radius:8%; }
+
+/* The LinkedIn codes show each speaker's toy figure, and the Documandments code shows two stone tablets. */
+.qr.face-whitney .qr-logo{ content:url(assets/talk/whitney-face.png); padding:0; border:3px solid #fff; border-radius:50%; box-sizing:content-box; }
+.qr.face-grey .qr-logo{ content:url(assets/talk/grey-face.png); padding:0; border:3px solid #fff; border-radius:50%; box-sizing:content-box; }
+.qr.tablet .qr-logo{ content:url(assets/talk/tablet.svg); padding:0; }
+
+/* When slide 7 is zoomed in, the scaled screenshot extends past the slide. The frame clips it, so nothing
+   shows outside the slide, but deck.js still counts it as overflow. This hides that false warning on slide 7 only.
+   deckCheck() still checks the slide in its unzoomed state. */
+section:has(.zoom-frame) .overflow-flag{ display:none; }

@@ -1,0 +1,59 @@
+name: Publish decks to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  # Each name is a deck folder at the repo root. Only these folders are published.
+  # Separate the names with spaces.
+  PUBLIC_DECKS: >-
+    documentation-talk
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy the public decks into _site
+        run: |
+          mkdir -p _site
+          {
+            echo '<!doctype html><meta charset="utf-8"><title>Presentations</title>'
+            echo '<h1>Presentations</h1><ul>'
+          } > _site/index.html
+          for deck in $PUBLIC_DECKS; do
+            if [ ! -f "$deck/index.html" ]; then
+              echo "::error::The deck folder '$deck' has no index.html."
+              exit 1
+            fi
+            cp -R "$deck" "_site/$deck"
+            echo "<li><a href=\"$deck/\">$deck</a></li>" >> _site/index.html
+          done
+          echo '</ul>' >> _site/index.html
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

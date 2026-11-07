@@ -1,0 +1,9 @@
+# Git ignores everything in private/ except the .gitkeep file.
+private/*
+!private/.gitkeep
+
+.DS_Store
+*.zip
+
+# The local Claude skills stay out of the repo.
+.claude/

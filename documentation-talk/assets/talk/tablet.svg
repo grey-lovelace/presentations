@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Two stone tablets with rounded tops, like the Ten Commandments. Each has Roman numerals carved into it. -->
+  <rect width="120" height="120" rx="14" fill="#fff"/>
+  <g stroke="#5b5b5b" stroke-width="3" fill="#b9b4ab">
+    <path d="M14 108 V38 a22 22 0 0 1 44 0 V108 Z"/>
+    <path d="M62 108 V38 a22 22 0 0 1 44 0 V108 Z"/>
+  </g>
+  <g font-family="Georgia, serif" font-weight="700" font-size="13" fill="#3f3f3f" text-anchor="middle">
+    <text x="36" y="44">I</text><text x="36" y="60">II</text><text x="36" y="76">III</text><text x="36" y="92">IV</text><text x="36" y="104" font-size="10">V</text>
+    <text x="84" y="44">VI</text><text x="84" y="60">VII</text><text x="84" y="76">VIII</text><text x="84" y="92">IX</text><text x="84" y="104" font-size="10">X</text>
+  </g>
+</svg>
